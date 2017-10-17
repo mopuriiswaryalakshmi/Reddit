@@ -9,6 +9,12 @@
   </head>
 
   <body>
+  	<% flash.each do |name,msg| %>
+  		<%= context_tag(:div, :msg, class: "alert alert-#{name}") %>
+  	<% end %>
+  	<!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+
     <%= yield %>
   </body>
 </html>
