@@ -9,23 +9,32 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= root_path %>">Reddit</a>
+    </div>
+    <% if user_signed_in? %>
+    <ul class="nav navbar-nav navbar-right">
+     <!--  <li class="active"><a href="#">Home</a></li> -->
+      <li class="active"><%= link_to 'Submit_link', new_link_path %></li>
+      <li><%= link_to 'Account', edit_user_registration_path %></li>
+      <li><%= link_to "Sign_out", destroy_user_session_path, :method => :delete %></li>
+    </ul>
+  <% else %>
+    <ul class="nav navbar-nav pull-right">
+      <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <li><%= link_to 'Sign in',new_user_session_path %></li>
+    </ul>
+    <% end %>
 
-  	<% if user_signed_in? %>
-	  <ul>
-	  	<li><%= link_to 'Submit_link', new_link_path %></li>
-	  	<li><%= link_to 'Account', edit_user_registration_path %></li>
-	  	<li><%= link_to "Sign_out", destroy_user_session_path, :method => :delete %></li>
-	  </ul>
-	<% else %>
-	  <ul>
-	  	<li><%= link_to 'Sign up', new_user_registration_path %></li>
-	  	<li><%= link_to 'Sign in',new_user_session_path %></li>
-	  </ul>
-  	<% end %>
+    <% flash.each do |name,msg| %>
+      <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+    <% end %>
+  </div>
+</nav>
 
-  	<% flash.each do |name,msg| %>
-  		<%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-  	<% end %>
+
   	<!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
 
